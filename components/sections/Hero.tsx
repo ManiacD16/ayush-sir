@@ -14,46 +14,7 @@ const Hero = () => {
   if (!mounted) return null
 
   return (
-    <section className="min-h-screen flex items-center justify-center blockchain-bg tech-grid matrix-bg relative overflow-hidden pt-20">
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Floating geometric shapes */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-secondary/20 rounded-full float-animation blockchain-node"></div>
-        <div
-          className="absolute top-40 right-20 w-16 h-16 bg-accent/20 rounded-full float-animation blockchain-node"
-          style={{ animationDelay: "1s" }}
-        ></div>
-        <div
-          className="absolute bottom-40 left-20 w-12 h-12 bg-secondary/20 rounded-full float-animation blockchain-node"
-          style={{ animationDelay: "2s" }}
-        ></div>
-
-        {/* Circuit pattern overlay */}
-        <div className="absolute inset-0 circuit-pattern opacity-30"></div>
-
-        {/* Tech code elements */}
-        <div className="absolute top-1/4 left-0 code-rain" style={{ animationDelay: "0s" }}>
-          {`{blockchain: "solidity"}`}
-        </div>
-        <div className="absolute top-1/3 right-0 code-rain" style={{ animationDelay: "2s" }}>
-          {`web3.eth.getBalance()`}
-        </div>
-        <div className="absolute top-1/2 left-1/4 code-rain" style={{ animationDelay: "4s" }}>
-          {`contract.deploy()`}
-        </div>
-        <div className="absolute top-2/3 right-1/4 code-rain" style={{ animationDelay: "6s" }}>
-          {`pragma solidity ^0.8.0;`}
-        </div>
-        <div className="absolute bottom-1/4 left-1/3 code-rain" style={{ animationDelay: "8s" }}>
-          {`mapping(address => uint)`}
-        </div>
-
-        {/* Holographic accent lines */}
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-secondary/30 to-transparent"></div>
-        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-accent/30 to-transparent"></div>
-        <div className="absolute left-0 top-1/3 w-full h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent"></div>
-        <div className="absolute left-0 bottom-1/3 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
-      </div>
-
+    <section className="min-h-screen flex items-center justify-center relative pt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="mb-8">
           <div className="relative w-48 h-48 mx-auto mb-8">
