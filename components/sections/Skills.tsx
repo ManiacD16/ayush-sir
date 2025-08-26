@@ -65,7 +65,7 @@ const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="py-20 relative ">
+    <section id="skills" className="py-20 relative overflow-x-hidden">
       {/* Animated Background */}
       {/* <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div> */}
       <div className="absolute inset-0">

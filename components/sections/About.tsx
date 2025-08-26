@@ -32,7 +32,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 relative ">
+    <section id="about" className="py-20 relative overflow-x-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 left-10 w-32 h-32 bg-secondary rounded-full animate-pulse"></div>

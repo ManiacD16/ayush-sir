@@ -14,7 +14,7 @@ const Hero = () => {
   if (!mounted) return null
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-20">
+    <section className="min-h-screen flex items-center justify-center relative pt-20 overflow-x-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="mb-8">
           <div className="relative w-48 h-48 mx-auto mb-8">

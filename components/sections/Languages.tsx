@@ -19,7 +19,7 @@ const Languages = () => {
   ]
 
   return (
-    <section id="languages" className="py-20 relative">
+    <section id="languages" className="py-20 relative overflow-x-hidden">
       {/* Background decoration */}
       {/* <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5"></div> */}
       <div className="absolute top-20 right-10 w-32 h-32 bg-secondary/20 rounded-full blur-3xl"></div>

@@ -43,7 +43,7 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-20 relative ">
+    <section id="contact" className="py-20 relative overflow-x-hidden">
       {/* Background Elements */}
       {/* <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10"></div> */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>

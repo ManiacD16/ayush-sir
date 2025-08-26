@@ -146,7 +146,7 @@ const Projects = () => {
   const categories = [...new Set(projects.map(p => p.category))]
 
   return (
-    <section id="projects" className="py-20 relative">
+    <section id="projects" className="py-20 relative overflow-x-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 ">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>

@@ -54,7 +54,7 @@ const Education = () => {
   }
 
   return (
-    <section id="education" className="py-20 relative">
+    <section id="education" className="py-20 relative overflow-x-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
