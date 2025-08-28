@@ -1,30 +1,60 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
-import { Mail, Phone, MapPin, Send, Github, Linkedin} from "lucide-react" //, Twitter 
+import { Mail, Phone, MapPin, Send, Github, Linkedin} from "lucide-react"
+
+// First install EmailJS: npm install @emailjs/browser
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Initialize EmailJS with your public key
+  // You'll get these from your EmailJS dashboard
+  const EMAILJS_SERVICE_ID = 'service_ngupp7u'
+  const EMAILJS_TEMPLATE_ID = 'template_3z6lwrx' 
+  const EMAILJS_PUBLIC_KEY = 'JmKLpCEC-oA0rTWd6'
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    // Handle form submission here
-    console.log("Form submitted:", formData)
-    
-    // Simulate form submission
-    setTimeout(() => {
+    setSubmitStatus('idle')
+
+    try {
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          from_phone: formData.phone,
+          message: formData.message,
+          // to_email: 'ayushrai2772@gmail.com'
+        },
+        EMAILJS_PUBLIC_KEY
+      )
+
+      console.log('Email sent successfully:', result)
+      setSubmitStatus('success')
+      setFormData({ name: "", email: "", phone: "", message: "" })
+    } catch (error) {
+      console.error('Email send failed:', error)
+      setSubmitStatus('error')
+    } finally {
       setIsSubmitting(false)
-      setFormData({ name: "", email: "", message: "" })
-    }, 1000)
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,7 +75,6 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 relative overflow-x-hidden">
       {/* Background Elements */}
-      {/* <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/10"></div> */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       
@@ -142,22 +171,32 @@ const Contact = () => {
                   <a href="https://www.linkedin.com/in/ayushrai2001" className="p-3 bg-primary/10 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 group/social">
                     <Linkedin size={20} className="group-hover/social:scale-110 transition-transform duration-300" />
                   </a>
-                  {/* <a href="#" className="p-3 bg-accent/10 rounded-lg hover:bg-accent hover:text-accent-foreground transition-all duration-300 group/social">
-                    <Twitter size={20} className="group-hover/social:scale-110 transition-transform duration-300" />
-                  </a> */}
                 </div>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-border/50 hover:shadow-2xl transition-all duration-500">
+          <div className="bg-card/80 backdrop-blur-sm rounded-2xl px-8 pt-8 pb-6 shadow-xl border border-border/50 hover:shadow-2xl transition-all duration-500">
             <h3 className="font-space-grotesk font-bold text-2xl text-card-foreground mb-8 flex items-center gap-3">
               <div className="w-8 h-8 bg-gradient-to-r from-secondary to-primary rounded-lg"></div>
               Send Message
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Success/Error Messages */}
+            {submitStatus === 'success' && (
+              <div className="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+                <p className="text-green-600 font-dm-sans font-semibold">Message sent successfully! I'll get back to you soon.</p>
+              </div>
+            )}
+
+            {submitStatus === 'error' && (
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                <p className="text-red-600 font-dm-sans font-semibold">Failed to send message. Please try again or email me directly.</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div className="group">
                 <label htmlFor="name" className="block font-dm-sans font-semibold text-card-foreground mb-2 group-focus-within:text-secondary transition-colors duration-300">
                   Your Name *
@@ -169,7 +208,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-4 bg-input/80 backdrop-blur-sm border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent font-dm-sans transition-all duration-300 hover:shadow-md"
+                  className="w-full px-4 py-2 bg-input/80 backdrop-blur-sm border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent font-dm-sans transition-all duration-300 hover:shadow-md"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -185,8 +224,24 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-4 bg-input/80 backdrop-blur-sm border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-dm-sans transition-all duration-300 hover:shadow-md"
+                  className="w-full px-4 py-2 bg-input/80 backdrop-blur-sm border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-dm-sans transition-all duration-300 hover:shadow-md"
                   placeholder="Enter your email address"
+                />
+              </div>
+
+              <div className="group">
+                <label htmlFor="phone" className="block font-dm-sans font-semibold text-card-foreground mb-2 group-focus-within:text-secondary transition-colors duration-300">
+                  Your Phone *
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 bg-input/80 backdrop-blur-sm border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent font-dm-sans transition-all duration-300 hover:shadow-md"
+                  placeholder="Enter your phone number"
                 />
               </div>
 
@@ -201,7 +256,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-4 bg-input/80 backdrop-blur-sm border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent font-dm-sans resize-none transition-all duration-300 hover:shadow-md"
+                  className="w-full px-4 py-2 bg-input/80 backdrop-blur-sm border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent font-dm-sans resize-none transition-all duration-300 hover:shadow-md"
                   placeholder="Tell me about your project or inquiry..."
                 />
               </div>
@@ -209,7 +264,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-secondary to-primary text-white px-6 py-4 rounded-xl hover:shadow-xl transition-all duration-300 font-dm-sans font-semibold flex items-center justify-center gap-3 group hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full bg-gradient-to-r from-secondary to-primary text-white px-6 py-2 rounded-xl hover:shadow-xl transition-all duration-300 font-dm-sans font-semibold flex items-center justify-center gap-3 group hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {isSubmitting ? (
                   <>
