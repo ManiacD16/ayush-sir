@@ -16,10 +16,24 @@ const Experience = () => {
     },
     {
       title: "Senior Blockchain Developer",
-      company: "Barcosys Software India Pvt. LTD",
-      period: "06/2024 - Present",
-      location: "India",
+      company: "Stack Meridian",
+      period: "12/2024 - Present",
+      location: "Remote",
       status: "current",
+      responsibilities: [
+        "Leading the development of multiple decentralized MLM projects using smart contracts and blockchain technology.",
+        "Designing and implementing secure and scalable smart contracts using Solidity.",
+        "Integrating Web3.js/Ethers.js with backend APIs to facilitate decentralized transactions.",
+        "Developing and optimizing multi-level referral systems on blockchain platforms.",
+        "Collaborating with frontend and backend teams to deliver seamless dApp experiences.",
+      ],
+    },
+    {
+      title: "Senior Blockchain Developer",
+      company: "Barcosys Software India Pvt. LTD",
+      period: "06/2024 - 12/2024",
+      location: "India",
+      status: "completed",
       responsibilities: [
         "Tech lead for MLM project and Telegram bot development.",
         "Designed architecture, developed smart contracts, and managed backend APIs.",

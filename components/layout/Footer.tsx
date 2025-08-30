@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-slate-800/50 to-transparent"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]"></div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <h3 className="font-space-grotesk font-bold text-2xl mb-2">Ayush Rai</h3>
@@ -40,7 +40,9 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="font-dm-sans text-gray-400">&copy; 2024 Ayush Rai. All rights reserved.</p>
+           <p className="font-dm-sans text-gray-400">
+    &copy; {new Date().getFullYear()} Ayush Rai. All rights reserved.
+  </p>
         </div>
       </div>
     </footer>
